@@ -1,0 +1,31 @@
+version: '3'
+services:
+  book_catalog:
+    image: book_catalog:latest
+    build: 
+      context: ./book_catalog
+      dockerfile: Dockerfile
+      args:
+        - NO_CACHE=true
+    container_name: book_catalog_cntr
+    ports:
+     - "4003:5001"
+    environment:
+      - PORT=5001
+      - DATABASE_URL=postgresql://manishpart4_db_user:OdO1V91MhsPHC3TCwpJDTwbKNn7MRpiI@dpg-crii48e8ii6s73f3vrpg-a.oregon-postgres.render.com/manishpart4_db
+    restart: "no"
+
+  inventory_management:
+    image: inventory_management:latest
+    build: 
+      context: ./inventory_management
+      dockerfile: Dockerfile
+      args:
+        - NO_CACHE=true
+    container_name: inventory_management_cntr
+    ports:
+     - "4004:5002"
+    environment:
+      - PORT=5002
+      - DATABASE_URL=postgresql://manishpart4_db_user:OdO1V91MhsPHC3TCwpJDTwbKNn7MRpiI@dpg-crii48e8ii6s73f3vrpg-a.oregon-postgres.render.com/manishpart4_db
+    restart: "no"
